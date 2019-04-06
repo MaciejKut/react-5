@@ -20,10 +20,11 @@ App = React.createClass({
                         url: data.fixed_width_downsampled_url,
                         sourceUrl: data.url
                     };
-                    callback(gif); // 6.
+                    resolve(callback(gif));
+                    // callback(gif); // 6.
 
                 } else {
-                    recect(new Error(this.statusText));
+                    reject(new Error(this.statusText));
                 }
             };
             request.onerror = function () {
@@ -66,29 +67,25 @@ App = React.createClass({
             width: '90%'
         };
 
-        return ( <
-            div style = {
-                styles
-            } >
+        return (<div style={styles}>
+            <h1> Wyszukiwarka GIFow! </h1>
+            <p> Znajdź gifa na <a href='http://giphy.com' > giphy </a>. Naciskaj enter, aby pobrać kolejne gify.</p >
             <
-            h1 > Wyszukiwarka GIFow! < /h1> <
-            p > Znajdź gifa na < a href = 'http://giphy.com' > giphy < /a>. Naciskaj enter, aby pobrać kolejne gify.</p >
-            <
-            Search onSearch = {
-                this.handleSearch
-            }
+                Search onSearch={
+                    this.handleSearch
+                }
             /> <
-            Gif loading = {
-                this.state.loading
-            }
-            url = {
-                this.state.gif.url
-            }
-            sourceUrl = {
-                this.state.gif.sourceUrl
-            }
-            /> < /
-            div >
+                Gif loading={
+                    this.state.loading
+                }
+                url={
+                    this.state.gif.url
+                }
+                sourceUrl={
+                    this.state.gif.sourceUrl
+                }
+            />
+        </div >
         );
     }
 });
